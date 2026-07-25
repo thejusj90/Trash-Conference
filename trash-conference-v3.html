@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Trash Conference — Request an Invite</title>
+<meta name="description" content="An intimate, invitation-led gathering of 40–50 sustainability, operations and procurement leaders. Goa, December 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#F1E9DD; --paper:#15110D; --accent:#DB8452; --accent-dim:rgba(219,132,82,.15);
+    --grey:#A79C8C; --line:rgba(241,233,221,.14); --card:#1D1812; --good:#93A66A; --bg-deep:#0C0906;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Sora',sans-serif;font-weight:700;letter-spacing:-0.02em;}
+  .headline,.cta-band h2{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.01em;}
+  a{color:inherit;}
+  button{font-family:'Inter',sans-serif;cursor:pointer;}
+  ::selection{background:var(--accent);color:#fff;}
+
+  /* ---------- NAV ---------- */
+  .navbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:16px min(6vw,64px);background:rgba(21,17,13,.86);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);}
+  .navbar .brand{font-family:'Sora',sans-serif;font-weight:700;font-size:14px;}
+  .navbar .brand small{display:block;font-weight:400;font-size:10px;color:var(--grey);margin-top:1px;letter-spacing:.02em;}
+  .navbar .nav-links{display:flex;align-items:center;gap:30px;}
+  .navbar .nav-links a{font-size:13px;color:var(--grey);text-decoration:none;transition:color .2s ease;}
+  .navbar .nav-links a:hover{color:var(--ink);}
+  .navbar .nav-cta{font-family:'Sora',sans-serif;font-weight:600;font-size:13px;padding:10px 20px;
+    border-radius:100px;background:var(--accent);color:#15110D;text-decoration:none;white-space:nowrap;transition:background .2s ease;}
+  .navbar .nav-cta:hover{background:var(--ink);}
+  @media (max-width:860px){ .navbar .nav-links{display:none;} }
+
+  .shell{display:grid;grid-template-columns:1.05fr .95fr;min-height:calc(100svh - 65px);}
+  @media (max-width:980px){ .shell{grid-template-columns:1fr;} }
+
+  /* ---------- LEFT: story panel ---------- */
+  .story{padding:min(6vw,64px) min(6vw,64px) 60px;display:flex;flex-direction:column;justify-content:center;position:relative;background:radial-gradient(circle at 12% 8%, rgba(219,132,82,.10), transparent 45%);}
+  .story::before{content:'';position:absolute;inset:0;z-index:-1;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.07;mix-blend-mode:overlay;pointer-events:none;}
+
+  .pill-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
+  .pill{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+    font-weight:700;color:var(--accent);border:1px solid var(--line);border-radius:100px;padding:9px 16px;}
+  .pill.solid{background:var(--accent-dim);border-color:transparent;color:var(--ink);}
+  .pill .live{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+  .headline{font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1.08;max-width:14ch;}
+  .headline .hi{color:var(--accent);}
+  .sub{margin-top:22px;font-size:1.05rem;color:var(--grey);max-width:46ch;}
+
+  .proof-row{display:flex;gap:28px;margin-top:38px;flex-wrap:wrap;}
+  .proof-item h3{font-size:1.9rem;font-family:'Fraunces',serif;font-weight:500;}
+  .proof-item p{font-size:12px;color:var(--grey);margin-top:2px;text-transform:uppercase;letter-spacing:.03em;}
+
+  .story-foot{margin-top:46px;font-size:12px;color:var(--grey);max-width:42ch;}
+
+  /* ---------- RIGHT: sticky form panel ---------- */
+  .apply-col{background:var(--card);border-left:1px solid var(--line);position:relative;}
+  .apply-col::before{content:'';position:absolute;inset:0;z-index:-1;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.05;mix-blend-mode:overlay;pointer-events:none;}
+  .apply-sticky{position:sticky;top:65px;padding:min(6vw,64px) min(5vw,56px);display:flex;flex-direction:column;justify-content:center;min-height:calc(100svh - 65px);}
+  @media (max-width:980px){ .apply-sticky{position:static;min-height:auto;padding:44px 6vw 60px;} .apply-col{border-left:none;border-top:1px solid var(--line);} }
+
+  .step-progress{display:flex;gap:6px;margin-bottom:28px;}
+  .step-progress i{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden;position:relative;}
+  .step-progress i span{position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
+  .step-progress i.done span, .step-progress i.active span{transform:scaleX(1);}
+
+  .form-title{font-size:1.5rem;}
+  .form-note{font-size:13px;color:var(--grey);margin-top:8px;}
+
+  .step{display:none;}
+  .step.active{display:block;animation:stepIn .4s ease;}
+  @keyframes stepIn{from{opacity:0;transform:translateX(10px);}to{opacity:1;transform:none;}}
+
+  .option-grid{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .option{border:1.5px solid var(--line);border-radius:12px;padding:16px 14px;font-size:13.5px;font-weight:600;text-align:left;
+    background:transparent;color:var(--ink);transition:border-color .2s ease, background .2s ease;}
+  .option:hover{border-color:var(--accent);}
+  .option.selected{border-color:var(--accent);background:var(--accent-dim);}
+
+  .field{display:flex;flex-direction:column;gap:8px;margin-top:18px;}
+  .field label{font-size:12px;font-weight:600;color:var(--grey);}
+  input,select,textarea{font-family:'Inter',sans-serif;font-size:15px;border:1.5px solid var(--line);border-radius:10px;
+    background:transparent;padding:13px 14px;color:var(--ink);outline:none;transition:border-color .2s ease;}
+  input:focus,select:focus,textarea:focus{border-color:var(--accent);}
+  textarea{resize:vertical;min-height:80px;}
+
+  .step-actions{display:flex;justify-content:space-between;align-items:center;margin-top:28px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;
+    padding:14px 26px;border-radius:10px;border:none;background:var(--accent);color:#15110D;transition:background .25s ease, transform .15s ease;}
+  .btn:hover{background:var(--ink);color:#15110D;}
+  .btn:active{transform:scale(.98);}
+  .btn-back{background:transparent;color:var(--grey);padding:14px 10px;}
+  .btn-back:hover{background:transparent;color:var(--ink);}
+  .btn:disabled{opacity:.4;cursor:not-allowed;}
+
+  .reassure{display:flex;align-items:center;gap:8px;margin-top:18px;font-size:12px;color:var(--grey);}
+  .reassure svg{flex-shrink:0;}
+
+  .success{display:none;text-align:center;padding:30px 0;}
+  .success.show{display:block;}
+  .success .check{width:52px;height:52px;border-radius:50%;background:var(--accent-dim);display:flex;align-items:center;
+    justify-content:center;margin:0 auto 20px;color:var(--accent);font-size:22px;}
+  .success h3{font-size:1.5rem;}
+  .success p{margin-top:12px;color:var(--grey);font-size:14px;max-width:36ch;margin-left:auto;margin-right:auto;}
+
+  /* ---------- shared section framing ---------- */
+  section{max-width:960px;margin:0 auto;padding:min(8vw,90px) 6vw;}
+  h2{font-size:clamp(1.7rem,3.2vw,2.4rem);line-height:1.15;}
+  section p.lede{margin-top:18px;color:var(--grey);font-size:1rem;max-width:60ch;line-height:1.65;}
+
+  .dash-eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin-bottom:16px;}
+  .dash-eyebrow::before{content:'';width:22px;height:1px;background:var(--accent);display:inline-block;}
+
+  /* ---------- stats band ---------- */
+  .stats-band{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stats-band .wrap{max-width:960px;margin:0 auto;padding:min(7vw,64px) 6vw;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media (max-width:700px){ .stats-band .wrap{grid-template-columns:1fr;} }
+  .stat-card{text-align:center;padding:32px 20px;border:1px solid var(--line);border-radius:16px;}
+  .stat-card h3{font-family:'Fraunces',serif;font-weight:500;font-size:3rem;color:var(--accent);}
+  .stat-card p{margin-top:8px;font-size:12px;color:var(--grey);text-transform:uppercase;letter-spacing:.06em;}
+
+  /* ---------- icon-card grid (This Room Is For) ---------- */
+  .icon-grid{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:700px){ .icon-grid{grid-template-columns:1fr;} }
+  .icon-card{padding:26px 24px;border:1px solid var(--line);border-radius:16px;background:var(--card);}
+  .icon-card .ic{width:38px;height:38px;border-radius:10px;background:var(--accent-dim);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .icon-card p{font-size:14.5px;color:var(--ink);line-height:1.5;}
+
+  /* ---------- testimonial ---------- */
+  .testimonial-section{text-align:center;}
+  .testimonial-section .dash-eyebrow{justify-content:center;}
+  .testimonial-block{max-width:680px;margin:0 auto;}
+  .testimonial-block .mark{font-family:'Fraunces',serif;font-size:3.6rem;color:var(--accent);opacity:.4;line-height:1;}
+  .testimonial-block blockquote{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:clamp(1.25rem,2.3vw,1.6rem);
+    line-height:1.42;color:var(--ink);margin-top:4px;}
+  .testimonial-block .who{margin-top:22px;font-size:13px;color:var(--grey);}
+
+  /* ---------- industries strip ---------- */
+  .industries-strip{text-align:center;}
+  .industries-strip .dash-eyebrow{justify-content:center;}
+  .sector-tags{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;justify-content:center;}
+  .sector-tags span{font-size:13px;padding:10px 20px;border:1px solid var(--line);border-radius:100px;color:var(--grey);}
+
+  /* ---------- faq ---------- */
+  .faq-item{border-top:1px solid var(--line);padding:24px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-item h3{font-size:1rem;font-weight:600;font-family:'Sora',sans-serif;}
+  .faq-item p{margin-top:8px;font-size:14px;color:var(--grey);max-width:60ch;}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{background:radial-gradient(circle at 50% -10%, #241d16, var(--bg-deep) 65%);color:var(--ink);text-align:center;max-width:none;padding:min(9vw,90px) 6vw;position:relative;overflow:hidden;}
+  .cta-band::before{content:'';position:absolute;inset:0;z-index:-1;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.09;mix-blend-mode:overlay;pointer-events:none;}
+  .cta-band h2{color:#fff;max-width:20ch;margin:0 auto;}
+  .cta-band p{color:#b9b9be;margin-top:16px;max-width:44ch;margin-left:auto;margin-right:auto;}
+  .cta-band .btn{margin-top:30px;background:var(--accent);}
+
+  /* ---------- footer ---------- */
+  footer.site-footer{border-top:1px solid var(--line);padding:40px 6vw;}
+  footer.site-footer .foot-wrap{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;
+    align-items:center;flex-wrap:wrap;gap:16px;}
+  footer.site-footer .foot-brand{font-size:12.5px;color:var(--grey);}
+  footer.site-footer .foot-links{display:flex;gap:26px;}
+  footer.site-footer .foot-links a{font-size:12.5px;color:var(--grey);text-decoration:none;}
+  footer.site-footer .foot-links a:hover{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">THE TRASH CONFERENCE<small>Powered by Plannex</small></div>
+  <div class="nav-links">
+    <a href="#why-this-room">Why This Room</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="#apply" class="nav-cta">Request an Invite</a>
+</nav>
+
+<div class="shell">
+  <!-- LEFT STORY PANEL -->
+  <div class="story">
+    <div class="pill-row">
+      <span class="pill">Goa, India · December 2026 · By Invitation</span>
+      <span class="pill solid"><span class="live"></span> 13 of 50 seats offered</span>
+    </div>
+
+    <h1 class="headline">Bring your <span class="hi">hardest problem.</span><br>Leave knowing who to call.</h1>
+    <p class="sub">An intimate, invitation-only gathering of 40–50 sustainability, operations, procurement and compliance leaders — built around real challenges, not another stage.</p>
+
+    <div class="proof-row">
+      <div class="proof-item"><h3>50</h3><p>Seats, verified</p></div>
+      <div class="proof-item"><h3>4</h3><p>Sectors in the room</p></div>
+      <div class="proof-item"><h3>2</h3><p>Days, off the record</p></div>
+    </div>
+
+    <div class="story-foot">Applications for the December cohort close <strong>31 August 2026</strong>. Reviewed on a rolling basis — earlier applicants get first pick of sector-matched sessions.</div>
+  </div>
+
+  <!-- RIGHT APPLY PANEL -->
+  <div class="apply-col" id="apply">
+    <div class="apply-sticky">
+
+      <div id="formWrap">
+        <div class="step-progress">
+          <i class="active" data-s="1"><span></span></i>
+          <i data-s="2"><span></span></i>
+          <i data-s="3"><span></span></i>
+        </div>
+        <h2 class="form-title">Request an invite</h2>
+        <p class="form-note">Takes about 90 seconds. Not a payment, not a commitment to attend.</p>
+
+        <form id="eoiForm">
+          <!-- STEP 1 -->
+          <div class="step active" data-step="1">
+            <div class="field"><label>Which best describes your role?</label></div>
+            <div class="option-grid" id="roleGrid">
+              <button type="button" class="option" data-val="Sustainability / ESG">Sustainability / ESG</button>
+              <button type="button" class="option" data-val="Operations">Operations</button>
+              <button type="button" class="option" data-val="Procurement">Procurement</button>
+              <button type="button" class="option" data-val="Compliance / Legal">Compliance / Legal</button>
+              <button type="button" class="option" data-val="Supply Chain">Supply Chain</button>
+              <button type="button" class="option" data-val="Corporate Leadership">Corporate Leadership</button>
+            </div>
+            <div class="step-actions">
+              <span></span>
+              <button type="button" class="btn" id="toStep2" disabled>Continue</button>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="step" data-step="2">
+            <div class="field"><label for="fname">Full name</label><input type="text" id="fname" required></div>
+            <div class="field"><label for="email">Work email</label><input type="email" id="email" required></div>
+            <div class="field"><label for="company">Organisation</label><input type="text" id="company" required></div>
+            <div class="field"><label for="title">Designation</label><input type="text" id="title" placeholder="e.g. Chief Sustainability Officer" required></div>
+            <div class="step-actions">
+              <button type="button" class="btn btn-back" data-back="1">← Back</button>
+              <button type="button" class="btn" id="toStep3">Continue</button>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="step" data-step="3">
+            <div class="field"><label for="problem">One problem you're currently facing <span style="font-weight:400;color:var(--grey);">(optional)</span></label>
+              <textarea id="problem" placeholder="This is what The Trash Table sessions are built from — be specific."></textarea>
+            </div>
+            <div class="step-actions">
+              <button type="button" class="btn btn-back" data-back="2">← Back</button>
+              <button type="submit" class="btn">Submit Application →</button>
+            </div>
+            <div class="reassure">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Reviewed by our team directly — never sold or shared.
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="success" id="successMsg">
+        <div class="check">✓</div>
+        <h3>You're in the queue.</h3>
+        <p>Every application is checked against sector mix, mandate and fit. If it's a match, we'll confirm your seat directly with your office within 5 working days.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WHY THIS ROOM -->
+<section id="why-this-room">
+  <div class="dash-eyebrow">Why This Room</div>
+  <h2>Another conference won't solve it. A closed room might.</h2>
+  <p class="lede">You already know sustainability is complicated. What you rarely get is a room where you can bring the actual problem — a procurement roadblock, a waste stream with no viable recycler, a target that works in a slide but not in operations — and work it through with people who've hit the same wall.</p>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="wrap">
+    <div class="stat-card"><h3>50</h3><p>Seats, Verified</p></div>
+    <div class="stat-card"><h3>4</h3><p>Sectors In The Room</p></div>
+    <div class="stat-card"><h3>2</h3><p>Days, Off The Record</p></div>
+  </div>
+</div>
+
+<!-- THIS ROOM IS FOR -->
+<section>
+  <div class="dash-eyebrow">Who's In The Room</div>
+  <h2>This room is for four kinds of people.</h2>
+  <div class="icon-grid">
+    <div class="icon-card">
+      <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <p>CSOs, ESG leaders and sustainability heads setting the direction</p>
+    </div>
+    <div class="icon-card">
+      <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
+      <p>Operations and supply chain leaders making it work</p>
+    </div>
+    <div class="icon-card">
+      <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-3.5 7-9V6l-7-3-7 3v6c0 5.5 7 9 7 9z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <p>Procurement, compliance and legal leaders controlling the decisions</p>
+    </div>
+    <div class="icon-card">
+      <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="4"/></svg></div>
+      <p>Selected innovators and ecosystem leaders building what's next</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial-section">
+  <div class="dash-eyebrow" style="justify-content:center;">The Word</div>
+  <div class="testimonial-block">
+    <div class="mark">"</div>
+    <blockquote>Curated the way you'd curate a dinner party, not a delegate list.</blockquote>
+    <div class="who">— [Curator Name], Founder, Plannex</div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="industries-strip">
+  <div class="dash-eyebrow">Industries In The Room</div>
+  <h2>Four sectors, one set of problems.</h2>
+  <div class="sector-tags">
+    <span>BFSI</span><span>Manufacturing</span><span>FMCG</span><span>Infrastructure</span>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="dash-eyebrow">Before You Apply</div>
+  <h2>What you'll want to know</h2>
+  <div style="margin-top:10px;">
+    <div class="faq-item"><h3>Is there a cost to attend?</h3><p>No delegate fee. Seats are allocated by application, not payment — this keeps the room a peer room, not a paid audience.</p></div>
+    <div class="faq-item"><h3>What does an invitation include?</h3><p>Two nights' stay and all meals in Goa for confirmed attendees. Travel to Goa is not included.</p></div>
+    <div class="faq-item"><h3>What happens after I apply?</h3><p>Our team reviews every application against sector mix, mandate and fit, and confirms directly with your office — never a mass acceptance email.</p></div>
+    <div class="faq-item"><h3>What happens to the problem I submit?</h3><p>Shared only with the small group matched to it in advance. Never published or attributed outside the room.</p></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="cta-band">
+  <h2>Only 50 seats. Applications close 31 August.</h2>
+  <p>If you're the person in the room who actually owns the problem, this is the room to bring it to.</p>
+  <button class="btn" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Request an Invite ↗</button>
+</div>
+
+<footer class="site-footer">
+  <div class="foot-wrap">
+    <div class="foot-brand">THE TRASH CONFERENCE — GOA · DECEMBER 2026 — Powered by Plannex</div>
+    <div class="foot-links">
+      <a href="#why-this-room">Why This Room</a>
+      <a href="#faq">FAQ</a>
+      <a href="#apply">Request an Invite</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // role selection (step 1)
+  const roleGrid = document.getElementById('roleGrid');
+  const toStep2Btn = document.getElementById('toStep2');
+  let selectedRole = null;
+  roleGrid.addEventListener('click', (e) => {
+    const opt = e.target.closest('.option');
+    if (!opt) return;
+    [...roleGrid.children].forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    selectedRole = opt.dataset.val;
+    toStep2Btn.disabled = false;
+  });
+
+  // step navigation
+  const steps = document.querySelectorAll('.step');
+  const progressBars = document.querySelectorAll('.step-progress i');
+  function goToStep(n){
+    steps.forEach(s => s.classList.toggle('active', s.dataset.step == n));
+    progressBars.forEach(bar => {
+      const s = parseInt(bar.dataset.s);
+      bar.classList.toggle('done', s < n);
+      bar.classList.toggle('active', s <= n);
+    });
+  }
+  document.getElementById('toStep2').addEventListener('click', () => goToStep(2));
+  document.getElementById('toStep3').addEventListener('click', () => {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const title = document.getElementById('title').value.trim();
+    if (!fname || !email || !company || !title){
+      [fname,email,company,title].forEach((v,i)=>{}); // simple required check
+      document.getElementById('fname').reportValidity();
+      if(!fname) return;
+    }
+    goToStep(3);
+  });
+  document.querySelectorAll('[data-back]').forEach(b => {
+    b.addEventListener('click', () => goToStep(parseInt(b.dataset.back)));
+  });
+
+  // submit
+  document.getElementById('eoiForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+  });
+</script>
+
+</body>
+</html>

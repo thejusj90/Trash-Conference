@@ -27,6 +27,8 @@
   .story{padding:min(6vw,64px) min(6vw,64px) 60px;display:flex;flex-direction:column;}
   .brand-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:auto;padding-bottom:60px;}
   .brand{font-family:'Sora',sans-serif;font-weight:700;font-size:15px;}
+  .brand-mark{display:flex;align-items:center;gap:9px;}
+  .brand-mark img{height:22px;width:auto;display:block;}
   .brand small{display:block;font-family:'Inter',sans-serif;font-weight:400;font-size:11px;color:var(--grey);margin-top:2px;}
   .hosted-by{display:flex;align-items:center;flex-wrap:wrap;row-gap:4px;gap:7px;margin-top:6px;}
   .hosted-by span{font-family:'Inter',sans-serif;font-weight:400;font-size:11px;color:var(--grey);white-space:nowrap;}
@@ -137,8 +139,8 @@
   <!-- LEFT STORY PANEL -->
   <div class="story">
     <div class="brand-row">
-      <div class="brand">THE TRASH CONCLAVE 2026
-        <div class="hosted-by"><span>Curated &amp; Hosted by</span><span class="host-mark"><img src="assets/trash-co-icon.png" alt=""><span class="brand-name">the trash co.</span></span></div>
+      <div class="brand"><span class="brand-mark"><img src="trash-co-icon.png" alt="The Trash Co logo">THE TRASH CONCLAVE 2026</span>
+        <div class="hosted-by"><span>Curated &amp; Hosted by</span><span class="host-mark"><img src="trash-co-icon.png" alt=""><span class="brand-name">the trash co.</span></span></div>
       </div>
       <div class="seats-badge"><span class="live"></span> 13 of 50 seats offered</div>
     </div>
@@ -319,10 +321,39 @@
   });
 
   // submit
-  document.getElementById('eoiForm').addEventListener('submit', (e) => {
+  const APPS_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwmA3n0B0lJ_z705NVrP69KBpAkZvNIowncCZzXi87-emc1wb7apOVOTwTmrB37CSCgLQ/exec';
+
+  document.getElementById('eoiForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    document.getElementById('formWrap').style.display = 'none';
-    document.getElementById('successMsg').classList.add('show');
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
+
+    const payload = {
+      role: document.querySelector('#roleGrid .option.selected')?.dataset.val || '',
+      fullName: document.getElementById('fname').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      organisation: document.getElementById('company').value.trim(),
+      designation: document.getElementById('title').value.trim(),
+      problem: document.getElementById('problem').value.trim()
+    };
+
+    try {
+      // text/plain + no-cors avoids CORS issues Apps Script web apps commonly hit;
+      // we don't need to read the response, just confirm the request was sent
+      await fetch(APPS_SCRIPT_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      document.getElementById('formWrap').style.display = 'none';
+      document.getElementById('successMsg').classList.add('show');
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Application →';
+      alert('Something went wrong submitting your application. Please try again or email us directly.');
+    }
   });
 </script>
 

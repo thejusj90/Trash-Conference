@@ -97,6 +97,10 @@
   .btn-back{background:transparent;color:var(--grey);padding:14px 10px;}
   .btn-back:hover{background:transparent;color:var(--ink);}
   .btn:disabled{opacity:.4;cursor:not-allowed;}
+  .btn.is-loading{opacity:1;background:var(--grey);cursor:wait;}
+  .spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;
+    animation:spin .7s linear infinite;display:inline-block;}
+  @keyframes spin{to{transform:rotate(360deg);}}
 
   .reassure{display:flex;align-items:center;gap:8px;margin-top:18px;font-size:12px;color:var(--grey);}
   .reassure svg{flex-shrink:0;}
@@ -326,8 +330,10 @@
   document.getElementById('eoiForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalLabel = submitBtn.innerHTML;
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting…';
+    submitBtn.classList.add('is-loading');
+    submitBtn.innerHTML = '<span class="spinner"></span> Submitting…';
 
     const payload = {
       role: document.querySelector('#roleGrid .option.selected')?.dataset.val || '',
@@ -358,7 +364,8 @@
       document.getElementById('successMsg').classList.add('show');
     } catch (err) {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Application →';
+      submitBtn.classList.remove('is-loading');
+      submitBtn.innerHTML = originalLabel;
       alert('Something went wrong submitting your application. Please try again or email us directly.');
     }
   });

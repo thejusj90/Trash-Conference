@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Trash Conclave 2026 — Request an Invite</title>
+<meta name="description" content="An intimate, invitation-led gathering of 40–50 sustainability, operations and procurement leaders. Goa, December 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E0E10; --paper:#F6F5F1; --accent:#487A1F; --accent-dim:#EAF4E1;
+    --grey:#6B6B6E; --line:rgba(14,14,16,.1); --card:#FFFFFF; --good:#1B9C6E; --brand-green:#70B638;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Sora',sans-serif;font-weight:700;letter-spacing:-0.02em;}
+  a{color:inherit;}
+  button{font-family:'Inter',sans-serif;cursor:pointer;color:inherit;-webkit-appearance:none;appearance:none;}
+  ::selection{background:var(--accent);color:#fff;}
+
+  .shell{display:grid;grid-template-columns:1.05fr .95fr;min-height:100svh;}
+  @media (max-width:980px){ .shell{grid-template-columns:1fr;} }
+
+  /* ---------- LEFT: story panel ---------- */
+  .story{padding:min(6vw,64px) min(6vw,64px) 60px;display:flex;flex-direction:column;}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:auto;padding-bottom:60px;}
+  .brand{font-family:'Sora',sans-serif;font-weight:700;font-size:15px;}
+  .brand-mark{display:flex;align-items:center;gap:9px;}
+  .brand-mark img{height:22px;width:auto;display:block;}
+  .brand small{display:block;font-family:'Inter',sans-serif;font-weight:400;font-size:11px;color:var(--grey);margin-top:2px;}
+  .hosted-by{display:flex;align-items:center;flex-wrap:wrap;row-gap:4px;gap:7px;margin-top:6px;}
+  .hosted-by span{font-family:'Inter',sans-serif;font-weight:400;font-size:11px;color:var(--grey);white-space:nowrap;}
+  .hosted-by .host-mark{display:inline-flex;align-items:center;gap:6px;}
+  .hosted-by img{height:16px;width:auto;display:block;}
+  .hosted-by .brand-name{font-family:'Sora',sans-serif;font-weight:600;font-size:12px;color:var(--ink);}
+  .seats-badge{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--ink);
+    background:var(--accent-dim);border-radius:100px;padding:8px 16px;}
+  .seats-badge .live{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+  .eyebrow{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:18px;}
+  .headline{font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1.08;max-width:14ch;}
+  .headline .hi{color:var(--accent);}
+  .sub{margin-top:22px;font-size:1.05rem;color:var(--grey);max-width:46ch;}
+
+  .proof-row{display:flex;gap:28px;margin-top:38px;flex-wrap:wrap;}
+  .proof-item{}
+  .proof-item h3{font-size:1.9rem;}
+  .proof-item p{font-size:12px;color:var(--grey);margin-top:2px;text-transform:uppercase;letter-spacing:.03em;}
+
+  .quote-strip{margin-top:44px;padding:20px 22px;background:var(--card);border:1px solid var(--line);border-radius:14px;max-width:460px;}
+  .quote-strip p{font-size:14px;color:var(--ink);font-style:italic;}
+  .quote-strip .who{margin-top:10px;font-size:12px;color:var(--grey);font-style:normal;}
+
+  .sector-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px;}
+  .sector-tags span{font-size:12px;padding:8px 14px;border:1px solid var(--line);border-radius:100px;color:var(--grey);}
+
+  .story-foot{margin-top:auto;padding-top:50px;font-size:12px;color:var(--grey);}
+
+  /* ---------- RIGHT: sticky form panel ---------- */
+  .apply-col{background:var(--card);border-left:1px solid var(--line);position:relative;}
+  .apply-sticky{position:sticky;top:0;padding:min(6vw,64px) min(5vw,56px);display:flex;flex-direction:column;justify-content:center;min-height:100svh;}
+  @media (max-width:980px){ .apply-sticky{position:static;min-height:auto;padding:44px 6vw 60px;} .apply-col{border-left:none;border-top:1px solid var(--line);} }
+
+  .step-progress{display:flex;gap:6px;margin-bottom:28px;}
+  .step-progress i{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden;position:relative;}
+  .step-progress i span{position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
+  .step-progress i.done span, .step-progress i.active span{transform:scaleX(1);}
+
+  .form-title{font-size:1.5rem;}
+  .form-note{font-size:13px;color:var(--grey);margin-top:8px;}
+
+  .step{display:none;}
+  .step.active{display:block;animation:stepIn .4s ease;}
+  @keyframes stepIn{from{opacity:0;transform:translateX(10px);}to{opacity:1;transform:none;}}
+
+  .option-grid{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .option{border:1.5px solid var(--line);border-radius:12px;padding:16px 14px;font-size:13.5px;font-weight:600;text-align:left;
+    background:transparent;transition:border-color .2s ease, background .2s ease;}
+  .option:hover{border-color:var(--accent);}
+  .option.selected{border-color:var(--accent);background:var(--accent-dim);}
+
+  .field{display:flex;flex-direction:column;gap:8px;margin-top:18px;}
+  .field label{font-size:12px;font-weight:600;color:var(--grey);}
+  input,select,textarea{font-family:'Inter',sans-serif;font-size:15px;border:1.5px solid var(--line);border-radius:10px;
+    background:transparent;padding:13px 14px;color:var(--ink);outline:none;transition:border-color .2s ease;}
+  input:focus,select:focus,textarea:focus{border-color:var(--accent);}
+  textarea{resize:vertical;min-height:80px;}
+
+  .step-actions{display:flex;justify-content:space-between;align-items:center;margin-top:28px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;
+    padding:14px 26px;border-radius:10px;border:none;background:var(--ink);color:#fff;transition:background .25s ease, transform .15s ease;}
+  .btn:hover{background:var(--accent);}
+  .btn:active{transform:scale(.98);}
+  .btn-back{background:transparent;color:var(--grey);padding:14px 10px;}
+  .btn-back:hover{background:transparent;color:var(--ink);}
+  .btn:disabled{opacity:.4;cursor:not-allowed;}
+
+  .reassure{display:flex;align-items:center;gap:8px;margin-top:18px;font-size:12px;color:var(--grey);}
+  .reassure svg{flex-shrink:0;}
+
+  .success{display:none;text-align:center;padding:30px 0;}
+  .success.show{display:block;}
+  .success .check{width:52px;height:52px;border-radius:50%;background:var(--accent-dim);display:flex;align-items:center;
+    justify-content:center;margin:0 auto 20px;color:var(--accent);font-size:22px;}
+  .success h3{font-size:1.5rem;}
+  .success p{margin-top:12px;color:var(--grey);font-size:14px;max-width:36ch;margin-left:auto;margin-right:auto;}
+
+  /* ---------- below-fold sections ---------- */
+  section{max-width:960px;margin:0 auto;padding:min(9vw,100px) 6vw;}
+  .split2{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  @media (max-width:820px){ .split2{grid-template-columns:1fr;} }
+  h2{font-size:clamp(1.7rem,3.2vw,2.4rem);line-height:1.15;}
+  section p.lede{margin-top:18px;color:var(--grey);font-size:1rem;max-width:52ch;line-height:1.65;}
+
+  .who-list{margin-top:22px;display:flex;flex-direction:column;gap:14px;}
+  .who-list div{display:flex;gap:12px;font-size:14.5px;color:var(--ink);align-items:flex-start;}
+  .who-list div::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0;}
+
+  .faq-item{border-top:1px solid var(--line);padding:24px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-item h3{font-size:1rem;font-weight:600;font-family:'Sora',sans-serif;}
+  .faq-item p{margin-top:8px;font-size:14px;color:var(--grey);max-width:60ch;}
+
+  .cta-band{background:var(--ink);color:#fff;text-align:center;max-width:none;padding:min(9vw,90px) 6vw;}
+  .cta-band h2{color:#fff;max-width:20ch;margin:0 auto;}
+  .cta-band p{color:#b9b9be;margin-top:16px;max-width:44ch;margin-left:auto;margin-right:auto;}
+  .cta-band .btn{margin-top:30px;background:var(--accent);}
+  .cta-band .btn:hover{background:#fff;color:var(--ink);}
+
+  footer{text-align:center;padding:40px 6vw;color:var(--grey);font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <!-- LEFT STORY PANEL -->
+  <div class="story">
+    <div class="brand-row">
+      <div class="brand"><span class="brand-mark"><img src="trash-co-icon.png" alt="The Trash Co logo">THE TRASH CONCLAVE 2026</span>
+        <div class="hosted-by"><span>Curated &amp; Hosted by</span><span class="host-mark"><img src="trash-co-icon.png" alt=""><span class="brand-name">the trash co.</span></span></div>
+      </div>
+      <div class="seats-badge"><span class="live"></span> 13 of 50 seats offered</div>
+    </div>
+
+    <div class="eyebrow">Goa, India · December 2026 · By Invitation</div>
+    <h1 class="headline">Bring your <span class="hi">hardest problem.</span><br>Leave knowing who to call.</h1>
+    <p class="sub">An intimate, invitation-only gathering of 40–50 sustainability, operations, procurement and compliance leaders — built around real challenges, not another stage.</p>
+
+    <div class="proof-row">
+      <div class="proof-item"><h3>50</h3><p>Seats, verified</p></div>
+      <div class="proof-item"><h3>4</h3><p>Sectors in the room</p></div>
+      <div class="proof-item"><h3>2</h3><p>Days, off the record</p></div>
+    </div>
+
+    <div class="quote-strip">
+      <p>"Curated the way you'd curate a dinner party, not a delegate list."</p>
+      <div class="who">— [Curator Name], Founder, The Trash Co</div>
+    </div>
+
+    <div class="sector-tags">
+      <span>BFSI</span><span>Manufacturing</span><span>FMCG</span><span>Infrastructure</span>
+    </div>
+
+    <div class="story-foot">Applications for the December cohort close <strong>31 August 2026</strong>. Reviewed on a rolling basis — earlier applicants get first pick of sector-matched sessions.</div>
+  </div>
+
+  <!-- RIGHT APPLY PANEL -->
+  <div class="apply-col" id="apply">
+    <div class="apply-sticky">
+
+      <div id="formWrap">
+        <div class="step-progress">
+          <i class="active" data-s="1"><span></span></i>
+          <i data-s="2"><span></span></i>
+          <i data-s="3"><span></span></i>
+        </div>
+        <h2 class="form-title">Request an invite</h2>
+        <p class="form-note">Takes about 90 seconds. Not a payment, not a commitment to attend.</p>
+
+        <form id="eoiForm">
+          <!-- STEP 1 -->
+          <div class="step active" data-step="1">
+            <div class="field"><label>Which best describes your role?</label></div>
+            <div class="option-grid" id="roleGrid">
+              <button type="button" class="option" data-val="Sustainability / ESG">Sustainability / ESG</button>
+              <button type="button" class="option" data-val="Operations">Operations</button>
+              <button type="button" class="option" data-val="Procurement">Procurement</button>
+              <button type="button" class="option" data-val="Compliance / Legal">Compliance / Legal</button>
+              <button type="button" class="option" data-val="Supply Chain">Supply Chain</button>
+              <button type="button" class="option" data-val="Corporate Leadership">Corporate Leadership</button>
+            </div>
+            <div class="step-actions">
+              <span></span>
+              <button type="button" class="btn" id="toStep2" disabled>Continue</button>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="step" data-step="2">
+            <div class="field"><label for="fname">Full name</label><input type="text" id="fname" required></div>
+            <div class="field"><label for="email">Work email</label><input type="email" id="email" required></div>
+            <div class="field"><label for="company">Organisation</label><input type="text" id="company" required></div>
+            <div class="field"><label for="title">Designation</label><input type="text" id="title" placeholder="e.g. Chief Sustainability Officer" required></div>
+            <div class="step-actions">
+              <button type="button" class="btn btn-back" data-back="1">← Back</button>
+              <button type="button" class="btn" id="toStep3">Continue</button>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="step" data-step="3">
+            <div class="field"><label for="problem">One problem you're currently facing <span style="font-weight:400;color:var(--grey);">(optional)</span></label>
+              <textarea id="problem" placeholder="This is what The Trash Table sessions are built from — be specific."></textarea>
+            </div>
+            <div class="step-actions">
+              <button type="button" class="btn btn-back" data-back="2">← Back</button>
+              <button type="submit" class="btn">Submit Application →</button>
+            </div>
+            <div class="reassure">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Reviewed by our team directly — never sold or shared.
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="success" id="successMsg">
+        <div class="check">✓</div>
+        <h3>You're in the queue.</h3>
+        <p>Every application is checked against sector mix, mandate and fit. If it's a match, we'll confirm your seat directly with your office within 5 working days.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WHY THIS ROOM -->
+<section>
+  <div class="split2">
+    <div>
+      <div class="eyebrow">Why This Room</div>
+      <h2>Another conference won't solve it. A closed room might.</h2>
+      <p class="lede">You already know sustainability is complicated. What you rarely get is a room where you can bring the actual problem — a procurement roadblock, a waste stream with no viable recycler, a target that works in a slide but not in operations — and work it through with people who've hit the same wall.</p>
+    </div>
+    <div>
+      <div class="eyebrow">This Room Is For</div>
+      <div class="who-list">
+        <div>CSOs, ESG leaders and sustainability heads setting the direction</div>
+        <div>Operations and supply chain leaders making it work</div>
+        <div>Procurement, compliance and legal leaders controlling the decisions</div>
+        <div>Selected innovators and ecosystem leaders building what's next</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="eyebrow">Before You Apply</div>
+  <h2>What you'll want to know</h2>
+  <div style="margin-top:10px;">
+    <div class="faq-item"><h3>Is there a cost to attend?</h3><p>No delegate fee. Seats are allocated by application, not payment — this keeps the room a peer room, not a paid audience.</p></div>
+    <div class="faq-item"><h3>What does an invitation include?</h3><p>Two nights' stay and all meals in Goa for confirmed attendees. Travel to Goa is not included.</p></div>
+    <div class="faq-item"><h3>What happens after I apply?</h3><p>Our team reviews every application against sector mix, mandate and fit, and confirms directly with your office — never a mass acceptance email.</p></div>
+    <div class="faq-item"><h3>What happens to the problem I submit?</h3><p>Shared only with the small group matched to it in advance. Never published or attributed outside the room.</p></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="cta-band">
+  <h2>Only 50 seats. Applications close 31 August.</h2>
+  <p>If you're the person in the room who actually owns the problem, this is the room to bring it to.</p>
+  <button class="btn" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Request an Invite ↗</button>
+</div>
+
+<footer>THE TRASH CONCLAVE 2026 — GOA, DECEMBER — Curated and Hosted by The Trash Co</footer>
+
+<script>
+  // role selection (step 1)
+  const roleGrid = document.getElementById('roleGrid');
+  const toStep2Btn = document.getElementById('toStep2');
+  let selectedRole = null;
+  roleGrid.addEventListener('click', (e) => {
+    const opt = e.target.closest('.option');
+    if (!opt) return;
+    [...roleGrid.children].forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    selectedRole = opt.dataset.val;
+    toStep2Btn.disabled = false;
+  });
+
+  // step navigation
+  const steps = document.querySelectorAll('.step');
+  const progressBars = document.querySelectorAll('.step-progress i');
+  function goToStep(n){
+    steps.forEach(s => s.classList.toggle('active', s.dataset.step == n));
+    progressBars.forEach(bar => {
+      const s = parseInt(bar.dataset.s);
+      bar.classList.toggle('done', s < n);
+      bar.classList.toggle('active', s <= n);
+    });
+  }
+  document.getElementById('toStep2').addEventListener('click', () => goToStep(2));
+  document.getElementById('toStep3').addEventListener('click', () => {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const title = document.getElementById('title').value.trim();
+    if (!fname || !email || !company || !title){
+      [fname,email,company,title].forEach((v,i)=>{}); // simple required check
+      document.getElementById('fname').reportValidity();
+      if(!fname) return;
+    }
+    goToStep(3);
+  });
+  document.querySelectorAll('[data-back]').forEach(b => {
+    b.addEventListener('click', () => goToStep(parseInt(b.dataset.back)));
+  });
+
+  // submit
+  const APPS_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwmA3n0B0lJ_z705NVrP69KBpAkZvNIowncCZzXi87-emc1wb7apOVOTwTmrB37CSCgLQ/exec';
+
+  document.getElementById('eoiForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
+
+    const payload = {
+      role: document.querySelector('#roleGrid .option.selected')?.dataset.val || '',
+      fullName: document.getElementById('fname').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      organisation: document.getElementById('company').value.trim(),
+      designation: document.getElementById('title').value.trim(),
+      problem: document.getElementById('problem').value.trim()
+    };
+
+    try {
+      // text/plain + no-cors avoids CORS issues Apps Script web apps commonly hit;
+      // we don't need to read the response, just confirm the request was sent
+      await fetch(APPS_SCRIPT_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      document.getElementById('formWrap').style.display = 'none';
+      document.getElementById('successMsg').classList.add('show');
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Application →';
+      alert('Something went wrong submitting your application. Please try again or email us directly.');
+    }
+  });
+</script>
+
+</body>
+</html>

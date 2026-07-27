@@ -339,14 +339,21 @@
     };
 
     try {
-      // text/plain + no-cors avoids CORS issues Apps Script web apps commonly hit;
-      // we don't need to read the response, just confirm the request was sent
-      await fetch(APPS_SCRIPT_ENDPOINT, {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
+
+      const res = await fetch(APPS_SCRIPT_ENDPOINT, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal: controller.signal
       });
+      clearTimeout(timeoutId);
+
+      const result = await res.json().catch(() => null);
+      if (!res.ok || !result || result.status !== 'success') {
+        throw new Error('Submission did not confirm success');
+      }
       document.getElementById('formWrap').style.display = 'none';
       document.getElementById('successMsg').classList.add('show');
     } catch (err) {
